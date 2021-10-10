@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.max
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -72,7 +73,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var x= n
+    var kol = 0
+    do {
+        kol=kol+1
+        x/=10
+    } while(x>0)
+    return kol
+}
 
 /**
  * Простая (2 балла)
@@ -80,7 +89,18 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int{
+    var fib1 = 1
+    var fib2 = 1
+    var k=0
+    while (k < n - 2) {
+        val sumfib = fib1 + fib2
+        fib1 = fib2
+        fib2 = sumfib
+        k+=1
+    }
+    return fib2
+}
 
 /**
  * Простая (2 балла)
@@ -120,8 +140,12 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
-
+fun lcm(m: Int, n: Int): Int {
+    for (k in max(n,m)..n*m step (max(n,m))){
+        if ((k % n == 0) and (k % m  == 0)) return k
+    }
+return m*n
+}
 /**
  * Средняя (3 балла)
  *
