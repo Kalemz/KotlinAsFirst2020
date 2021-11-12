@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
@@ -75,12 +76,12 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var x= n
+    var x = n
     var kol = 0
     do {
-        kol=kol+1
-        x/=10
-    } while(x>0)
+        kol = kol + 1
+        x /= 10
+    } while (x > 0)
     return kol
 }
 
@@ -90,15 +91,15 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int{
+fun fib(n: Int): Int {
     var fib1 = 1
     var fib2 = 1
-    var k=0
+    var k = 0
     while (k < n - 2) {
         val sumfib = fib1 + fib2
         fib1 = fib2
         fib2 = sumfib
-        k+=1
+        k += 1
     }
     return fib2
 }
@@ -142,11 +143,12 @@ fun collatzSteps(x: Int): Int = TODO()
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    for (k in max(n,m)..n*m step (max(n,m))){
-        if ((k % n == 0) and (k % m  == 0)) return k
+    for (k in max(n, m)..n * m step (max(n, m))) {
+        if ((k % n == 0) && (k % m == 0)) return k
     }
-return m*n
+    return m * n
 }
+
 /**
  * Средняя (3 балла)
  *
@@ -155,11 +157,12 @@ return m*n
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    for (c in 2..min(m,n)){
-        if ((n%c==0) and (m%c==0)) return false
+    for (c in 2..min(m, n)) {
+        if ((n % c == 0) && (m % c == 0)) return false
 
     }
-return true}
+    return true
+}
 
 /**
  * Средняя (3 балла)
@@ -181,6 +184,7 @@ fun revert(n: Int): Int = TODO()
  */
 fun isPalindrome(n: Int): Boolean = TODO()
 
+
 /**
  * Средняя (3 балла)
  *
@@ -190,6 +194,8 @@ fun isPalindrome(n: Int): Boolean = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean = TODO()
+
+
 
 /**
  * Средняя (4 балла)
@@ -222,7 +228,22 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var sumkv = 0
+    var k = 1
+    var s = n
+    while (s > 0) {
+        sumkv = sqr(k)
+        s -= digitNumber(sumkv)
+        k += 1
+    }
+    if (s < 0) while (s != 0) {
+        sumkv /= 10
+        s += 1
+    }
+    return sumkv % 10
+
+}
 
 /**
  * Сложная (5 баллов)
@@ -233,4 +254,21 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    if (n < 3) return 1
+    var fib1 = 1
+    var fib2 = 1
+    var k = n - 2
+    var sumfib = 0
+    while (k > 0) {
+        sumfib = fib1 + fib2
+        fib1 = fib2
+        fib2 = sumfib
+        k -= digitNumber(sumfib)
+    }
+    if (k < 0) while (k != 0) {
+        sumfib /= 10
+        k += 1
+    }
+    return sumfib % 10
+}

@@ -69,11 +69,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    return when{
-        age % 100 in 10..14-> "$age лет"
-        age % 10 in 2..4 ->"$age года"
-        age % 10 ==1 ->"$age год"
-        else ->"$age лет"
+    return when {
+        age % 100 in 10..14 -> "$age лет"
+        age % 10 in 2..4 -> "$age года"
+        age % 10 == 1 -> "$age год"
+        else -> "$age лет"
     }
 }
 
@@ -140,13 +140,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return when{
-
-        (a>=d) and (c>=a) ->(c-a)
-        (a>=c) and (b<=d) ->(b-a)
-        (b>=c) and (a<=d) and (b<=d) ->(b-c)
-        (b>=d) and (c<=a) and (a<=d) ->(d-a)
-        (a<=c) and (d<=b) ->(d-c)
-        else          ->-1    }
+    return when {
+        (a >= d) && (c >= a) -> (c - a)
+        (a >= c) && (b <= d) -> (b - a)
+        (b >= c) && (a <= d) && (b <= d) -> (b - c)
+        (b >= d) && (c <= a) && (a <= d) -> (d - a)
+        (a <= c) && (d <= b) -> (d - c)
+        else -> -1
+    }
 }
 

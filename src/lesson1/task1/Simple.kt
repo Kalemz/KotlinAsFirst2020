@@ -77,7 +77,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int {
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
-    return((sagenes*48*4.445+arshins*16*4.445+vershoks*4.445)/100)
+    return ((sagenes * 48 * 4.445 + arshins * 16 * 4.445 + vershoks * 4.445) / 100)
 }
 
 /**
@@ -87,7 +87,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
-    return(((deg+min/60.0+sec/3600.0)*PI)/180.0)
+    return (((deg + min / 60.0 + sec / 3600.0) * PI) / 180.0)
 }
 
 /**
