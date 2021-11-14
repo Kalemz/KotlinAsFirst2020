@@ -137,7 +137,15 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    var b = 0.0
+    if (list.isNotEmpty()) b = list.sum() / list.size
+    if (list.isNotEmpty()) {
+        for (ch1 in 0 until list.size)
+            list[ch1] = list[ch1] - b
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -186,7 +194,18 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    val x = mutableListOf<Int>()
+    var ch1 = n
+    for (del in 2..n) {
+        if (ch1 % del == 0)
+            while (ch1 % del == 0) {
+                x.add(del)
+                ch1 /= del
+            }
+    }
+    return x.joinToString(separator = "*")
+}
 
 /**
  * Средняя (3 балла)
