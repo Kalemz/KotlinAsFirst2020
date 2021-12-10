@@ -2,6 +2,10 @@
 
 package lesson6.task1
 
+import lesson4.task1.roman
+import java.lang.Exception
+import kotlin.math.max
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -127,7 +131,19 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int = try {
+    val results = jumps.split(" ")
+    var maxjump = -1
+    for (i in results.indices step 2) {
+        if (results[i + 1].contains('+') and (results[i].toInt() > maxjump)) {
+                maxjump = results[i].toInt()
+            }
+    }
+    maxjump
+
+} catch (e: Exception) {
+    -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -162,14 +178,31 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val globparts = description.split("; ")
+    var name = ""
+    var maxprice = -1.0
+    if (globparts[0] == "") for (part in globparts) {
+        name = ""
+    }
+    if (globparts[0] != "") for (part in globparts) {
+        val parts = part.split(" ")
+        if (parts[1].toDouble() > maxprice) {
+            maxprice = parts[1].toDouble()
+            name = parts[0]
+        }
+
+    }
+    return name
+
+}
 
 /**
  * Сложная (6 баллов)
  *
  * Перевести число roman, заданное в римской системе счисления,
  * в десятичную систему и вернуть как результат.
- * Римские цифры: 1 = I, 4 = IV, 5 = V, 9 = IX, 10 = X, 40 = XL, 50 = L,
+ * Римские цфиры: 1 = I, 4 = IV, 5 = V, 9 = IX, 10 = X, 40 = XL, 50 = L,
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: XXIII = 23, XLIV = 44, C = 100
  *
