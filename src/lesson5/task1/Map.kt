@@ -168,7 +168,8 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  * Средняя (4 балла)
  *
  * Для заданного списка пар "акция"-"стоимость" вернуть ассоциативный массив,
- * содержащий для каждой акции ее усредненную стоимость.
+ * содержащий для каждой акци
+ * и ее усредненную стоимость.
  *
  * Например:
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
@@ -178,17 +179,20 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
     val result = mutableMapOf<String, Double>()
     val list1 = mutableMapOf<String, Int>()
     for ((key, value) in stockPrices) {
-        result[key] = result.getOrPut(key) { 0.0 } + value
-        list1[key] = list1.getOrPut(key) { 0 } + 1
-
+        if (!result.containsKey(key)) {
+            result[key] = value
+            list1[key] = 1
+        } else {
+            result[key] = result.getOrPut(key) { value } + value
+            list1[key] = list1.getOrPut(key) { 1 } + 1
+        }
     }
     for ((key, value) in result) {
-        if (list1[key] != null)
-            result[key] = value / list1[key]!!
-
+        result[key] = value / list1[key]!!
     }
     return result
 }
+
 
 /**
  * Средняя (4 балла)
@@ -205,7 +209,21 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var minprice = 0.0
+    var result: String? = null
+    for ((key) in stuff) {
+        if (stuff[key]?.first == kind) {
+            if ((minprice > (stuff[key]?.second!!) || (minprice == 0.0))) {
+                minprice = (stuff[key]?.second!!)
+                result = key
+                print(key)
+                print(stuff[key]?.second)
+            }
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -238,8 +256,9 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         if (list1[x] == list1[x + 1]) {
             kol += 1
             map1[list1[x]] = kol
-        } else
+        } else if (list1[x] != list1[x + 1]) {
             kol = 1
+        }
 
     }
     return map1
