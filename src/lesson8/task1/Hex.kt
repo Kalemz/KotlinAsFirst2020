@@ -194,6 +194,14 @@ fun pathBetweenHexes(from: HexPoint, to: HexPoint): List<HexPoint> = TODO()
  */
 fun hexagonByThreePoints(a: HexPoint, b: HexPoint, c: HexPoint): Hexagon? = TODO()
 
+
+
+
+
+
+
+
+
 /**
  * Очень сложная (20 баллов)
  *

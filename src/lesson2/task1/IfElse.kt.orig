@@ -71,11 +71,20 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
 fun ageDescription(age: Int): String {
     return when {
         age % 100 in 10..14 -> "$age лет"
+<<<<<<< .merge_file_a03524
+        age % 10 in 2..4 -> "$age года"
+        age % 10 == 1 -> "$age год"
+        else -> "$age лет"
+    }
+}
+=======
         age % 10 == 1 -> "$age год"
         age % 10 in 1..4 -> "$age года"
         else -> "$age лет"
     }
 }
+
+>>>>>>> .merge_file_a10520
 
 /**
  * Простая (2 балла)

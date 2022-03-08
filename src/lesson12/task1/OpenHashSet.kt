@@ -2,6 +2,10 @@
 
 package lesson12.task1
 
+import kotlin.collections.contentHashCode as contentHashCode1
+import kotlin.collections.sliceArray as collectionsSliceArray
+
+
 /**
  * Класс "хеш-таблица с открытой адресацией"
  *
@@ -17,6 +21,7 @@ package lesson12.task1
  */
 class OpenHashSet<T>(val capacity: Int) {
 
+
     /**
      * Массив для хранения элементов хеш-таблицы
      */
@@ -25,28 +30,95 @@ class OpenHashSet<T>(val capacity: Int) {
     /**
      * Число элементов в хеш-таблице
      */
-    val size: Int get() = TODO()
+    val size: Int
+        get() {
+            when (capacity) {
+                0 -> {
+                    return 0
+                }
+                else -> {
+                    for (index in 0..capacity - 1) {
+                        when {
+                            elements[index] == null -> {
+                                return index
+                            }
+                        }
+                    }
+                    return capacity
+                }
+            }
+        }
+
 
     /**
      * Признак пустоты
      */
-    fun isEmpty(): Boolean = TODO()
+    fun isEmpty(): Boolean = capacity == 0 || elements[0] == null
 
     /**
      * Добавление элемента.
      * Вернуть true, если элемент был успешно добавлен,
      * или false, если такой элемент уже был в таблице, или превышена вместимость таблицы.
      */
-    fun add(element: T): Boolean = TODO()
+    fun add(element: T): Boolean {
+
+        for (index in 0..capacity - 1) {
+            when {
+                elements[index] == null -> {
+                    elements[index] = element
+                    return true
+                }
+                elements[index] == element -> {
+                    return false
+                }
+            }
+        }
+        return false
+    }
+
 
     /**
      * Проверка, входит ли заданный элемент в хеш-таблицу
      */
-    operator fun contains(element: T): Boolean = TODO()
+    operator fun contains(element: T): Boolean {
+        for (index in 0..capacity - 1) {
+            when {
+                elements[index] == element -> {
+                    return true
+                }
+                elements[index] == null -> {
+                    return false
+                }
+            }
+
+        }
+        return false
+    }
 
     /**
      * Таблицы равны, если в них одинаковое количество элементов,
      * и любой элемент из второй таблицы входит также и в первую
      */
-    override fun equals(other: Any?): Boolean = TODO()
+    override fun equals(other: Any?): Boolean {
+        if (other !is OpenHashSet<*> || size != other.size) {
+            return false
+        }
+        for (index in 0..size - 1) {
+            when {
+                elements[index] != other.elements[index] -> {
+                    return false
+                }
+            }
+
+        }
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return elements.collectionsSliceArray<Any?>(indices = 0..size).contentHashCode1<Any?>()
+    }
+
 }
+
+
+
